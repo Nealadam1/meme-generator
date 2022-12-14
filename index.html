@@ -23,6 +23,15 @@
 
     <main class="main-content-container">
         <section class="gallery-container">
+            <div class="search-bar">
+                <input onkeyup="onSetFilterBy({keyword: this.value})" type="text" placeholder="Search">
+                <ul class="keyword-search">
+
+                </ul>
+            </div>
+            <section class="image-container">
+                <img src="">
+            </section style=font>
 
         </section>
         <section  class="editor-container">
@@ -34,34 +43,34 @@
             <section class="control-box">
                 <input onkeyup="onSetLineText(this.value,this.dataset.memeId)" class="editor-text" type="text" name="textEditor" placeholder="Enter Text">
                 <div class="crud-btns">
-                    <img onclick="onNextText(`${meme.selectedLineIdx}`)" src="" alt="">
-                    <img onclick="onCreateLine(`${meme.lines}`)" src="" alt="">
-                    <img onclick="onDeleteText(`${meme.lines[selectedLineIdx]}`)" src="" alt="">
+                    <img onclick="onNextText(this.dataset.memeId)" src="" alt="">
+                    <img onclick="onCreateLine(this.dataset.memeId)" src="" alt="">
+                    <img onclick="onDeleteText(this.dataset.memeId)" src="" alt="">
                 </div>
                 <div class="style-editor">
-                    <button onclick="onIncreaseFont(`${meme.lines[selectedLineIdx]}`)"></button>
-                    <button onclick="onDecreaseFont(`${meme.lines[selectedLineIdx]}`)"></button>
-                    <button onclick="onAlignLeft(`${meme.lines[selectedLineIdx]}`)"></button>
-                    <button onclick="onAlignCenter(`${meme.lines[selectedLineIdx]}`)"></button>
-                    <button onclick="onAlignRight(`${meme.lines[selectedLineIdx]}`)"></button>
-                    <button onclick="onSetSrokeColor(`${meme.lines[selectedLineIdx]}`)"></button>
+                    <button onclick="onIncreaseFont(this.dataset.memeId)"></button>
+                    <button onclick="onDecreaseFont(this.dataset.memeId)"></button>
+                    <button onclick="onAlignLeft(this.dataset.memeId)"></button>
+                    <button onclick="onAlignCenter(this.dataset.memeId)"></button>
+                    <button onclick="onAlignRight(this.dataset.memeId)"></button>
+                    <button onclick="onSetSrokeColor(this.dataset.memeId)"></button>
                     <select name="fontStyle" id="">
                         <option value="impact">Impact</option>
                         <option value="impact">Impact</option>
                     </select>
-                    <button onclick="onSetFontColor(`${meme.lines[selectedLineIdx]}`)"></button>
+                    <button onclick="onSetFontColor(this.dataset.memeId)"></button>
                 </div>
                 <div class="sticker-box">
                     <ul class="sticker-list"> // render sticekrs seperetly?
-                        <li onclick="onAddSticker()" class="sticker-item"></li>
-                        <li onclick="onAddSticker()" class="sticker-item"></li>
-                        <li onclick="onAddSticker()" class="sticker-item"></li>
-                        <li onclick="onAddSticker()" class="sticker-item"></li>
+                        <li onclick="onAddSticker(this.dataset.memeId)" class="sticker-item"></li>
+                        <li onclick="onAddSticker(this.dataset.memeId)" class="sticker-item"></li>
+                        <li onclick="onAddSticker(this.dataset.memeId)" class="sticker-item"></li>
+                        <li onclick="onAddSticker(this.dataset.memeId)" class="sticker-item"></li>
                     </ul>
                 </div>
                 <div class="share-container">
-                    <img onclick="onShare(meme)" src="" alt="">
-                    <img onclick="onDownload(meme)" src="" alt="">
+                    <img onclick="onShare(this.dataset.memeId)" src="" alt="">
+                    <img onclick="onDownload(this.dataset.memeId)" src="" alt="">
                 </div>
 
             </section>
