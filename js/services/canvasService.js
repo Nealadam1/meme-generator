@@ -1,34 +1,50 @@
 
-let gElCanvas
-let gCtx
+var gElCanvas
+var gCtx
+var gIsDrag = false
+var gStartPos
+const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend'];
 
-function renderCanvas(meme){
-    const {selectedImgId,lines}=meme
-    console.log('canvas render')
-    gElCanvas=document.getElementById('meme-canvas')
-    gCtx=gElCanvas.getContext('2d')
-    // resizeCanvas()
-    drawImg(selectedImgId,lines)
+function renderCanvas() {
     
+    // resizeCanvas()
+    const { selectedImgId, lines } = getMeme()
+    drawImg(selectedImgId, lines)
+
+
 }
 
 function resizeCanvas() {
     const elContainer = document.querySelector('.canvas-container')
     // Note: changing the canvas dimension this way clears the canvas
-    gElCanvas.width = elContainer.offsetWidth - 20
+    gElCanvas.width = 450
     // Unless needed, better keep height fixed.
-    gElCanvas.height = elContainer.offsetHeight
+    gElCanvas.height = 450
 }
 
 
-function drawImg(imgId,lines) {
+function drawImg(imgId, lines) {
     const elImg = new Image() // Create a new html img element
     elImg.src = `img/gallery/${imgId}.jpg` // Send a network req to get that image, define the img src
     elImg.onload = () => {
         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
         console.log(lines)
-        lines.map(line=> drawText(line,line.posX,100))  
+        lines.forEach(line => drawText(line, line.pos.x, line.pos.y))
+         if(gSaveClean) return gSaveClean=false
+         renderSelect()
     }
+}
+
+function renderSelect() {
+    const selectPos = getSelectPos()
+    if (!selectPos) return
+    const { x, y, w, h } = selectPos
+    gCtx.beginPath();
+    gCtx.roundRect(x, y, w, h, 20);
+    gCtx.lineWidth = 2;
+    gCtx.strokeStyle = 'white';
+    gCtx.stroke();
+
 }
 function drawText(line, x, y) {
     gCtx.lineWidth = 2
@@ -40,14 +56,15 @@ function drawText(line, x, y) {
 
     gCtx.fillText(line.txt, x, y) // Draws (fills) a given text at the given (x, y) position.
     gCtx.strokeText(line.txt, x, y) // Draws (strokes) a given text at the given (x, y) position.
+    setTextWidth(line, gCtx.measureText(line.txt).width)
 }
 
-function downloadCanvas(elLink){
+function downloadCanvas(elLink) {
     const imgContent = gElCanvas.toDataURL('image/jpeg') // image/jpeg the default format
     console.log(imgContent)
     elLink.href = imgContent
 }
-function shareCanvas(){
+function shareCanvas() {
     const imgDataUrl = gElCanvas.toDataURL('image/jpeg')
     function onSuccess(uploadedImgUrl) {
         // Encode the instance of certain characters in the url
@@ -57,4 +74,68 @@ function shareCanvas(){
     // Send the image to the server
     doUploadImg(imgDataUrl, onSuccess)
 
+}
+
+function addListeners() {
+    addMouseListeners();
+    addTouchListeners();
+}
+
+function addMouseListeners() {
+    gElCanvas.addEventListener('mousemove', onMove);
+
+    gElCanvas.addEventListener('mousedown', onDown);
+
+    gElCanvas.addEventListener('mouseup', onUp);
+}
+
+function addTouchListeners() {
+    gElCanvas.addEventListener('touchmove', onMove);
+
+    gElCanvas.addEventListener('touchstart', onDown);
+
+    gElCanvas.addEventListener('touchend', onUp);
+}
+
+function onDown(ev) {
+    const pos = getEvPos(ev);
+    gIsDrag = isDragable(pos);
+    console.log(gIsDrag)
+    renderCanvas();
+    updateTextInput();
+    gStartPos = pos;
+    document.body.style.cursor = 'grabbing';
+}
+
+function onMove(ev) {
+    const pos = getEvPos(ev);
+    
+    if (gIsDrag) {
+        
+        dragSelected(pos, gStartPos);
+        gStartPos = pos;
+        renderCanvas();
+        return
+    }
+}
+
+function onUp() {
+    gIsDrag = false;
+    document.body.style.cursor = 'grab';
+}
+
+function getEvPos(ev) {
+    var pos = {
+        x: ev.offsetX,
+        y: ev.offsetY,
+    };
+    if (TOUCH_EVS.includes(ev.type)) {
+        ev.preventDefault();
+        ev = ev.changedTouches[0];
+        pos = {
+            x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
+            y: ev.pageY - ev.target.offsetTop - ev.target.clientTop,
+        };
+    }
+    return pos;
 }

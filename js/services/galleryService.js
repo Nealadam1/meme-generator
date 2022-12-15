@@ -34,6 +34,7 @@ function updateKeywordCount(keyword){
 }
 
 function getMemesGallery(){
-   var memeImgs=loadFromStorage(MEME_STORAGE)
-   return memeImgs
+   var memes=loadFromStorage(MEME_STORAGE)
+   gMemesGallery=memes
+   return memes
 }

@@ -37,7 +37,7 @@
         <section class="editor-container">
             <div class="canvas-container">
                 <canvas id="meme-canvas" height="450" width="450">
-
+                
                 </canvas>
             </div>
             <!-- TODO ADD TITLES TO BTNS -->
@@ -45,45 +45,47 @@
                 <input onkeyup="onSetLineText(this.value)" class="editor-text" type="text" name="textEditor"
                     placeholder="Enter Text">
                 <div class="crud-btns">
-                    <img class ="btn" onclick="onNextLine()" src="img/buttons/on-next-line.png" alt="">
-                    <img class ="btn" onclick="onCreateLine()" src="img/buttons/create-line.png" alt="">
-                    <img class ="btn" onclick="onDeleteText()" src="img/buttons/on-delete-text.png" alt="">
+                    <img class="btn" onclick="onNextLine()" src="img/buttons/on-next-line.png" alt="">
+                    <img class="btn" onclick="onCreateLine()" src="img/buttons/create-line.png" alt="">
+                    <img class="btn" onclick="onDeleteText()" src="img/buttons/on-delete-text.png" alt="">
                 </div>
                 <div class="style-editor">
-                    <img class ="btn" onclick="onIncreaseFont()" src="img/buttons/on-increase-font.png">
-                    <img class ="btn" onclick="onDecreaseFont()" src="img/buttons/on-decrease-font.png">
-                    <img class ="btn" onclick="onAlignLeft()" src="img/buttons/on-align-left.png">
-                    <img class ="btn" onclick="onAlignCenter()" src="img/buttons/on-align-center.png">
-                    <img class ="btn" onclick="onAlignRight()" src="img/buttons/on-align-right.png">
+                    <img class="btn" onclick="onIncreaseFont()" src="img/buttons/on-increase-font.png">
+                    <img class="btn" onclick="onDecreaseFont()" src="img/buttons/on-decrease-font.png">
+                    <img class="btn" onclick="onAlignLeft()" src="img/buttons/on-align-left.png">
+                    <img class="btn" onclick="onAlignCenter()" src="img/buttons/on-align-center.png">
+                    <img class="btn" onclick="onAlignRight()" src="img/buttons/on-align-right.png">
                     <div class="font-select">
                         <img src="img/buttons/select-bg.png" alt="" srcset="">
-                        <select  class ="btn" onchange="onSetFont(this.value)" name="fontStyle" id="">
+                        <select class="btn" onchange="onSetFont(this.value)" name="fontStyle" id="">
                             <option value="impact">Impact</option>
                             <option style="font-family:Arial" value="arial">Arial</option>
                         </select>
                     </div>
                     <div class="set-stroke-color">
-                        <input class ="btn" oninput="onSetStrokeColor(this.value)" type="color" name="" id="">
+                        <input class="btn" oninput="onSetStrokeColor(this.value)" type="color" name="" id="">
                         <img src="img/buttons/set-color-stroke.png">
                     </div>
                     <div class="set-font-color">
-                        <input class ="btn" oninput="onSetFontColor(this.value)" type="color" name="" id="">
+                        <input class="btn" oninput="onSetFontColor(this.value)" type="color" name="" id="">
                         <img src="img/buttons/set-color-font.png">
                     </div>
 
                 </div>
                 <div class="sticker-box">
-                    <ul class="sticker-list"> // render sticekrs seperetly?
-                        <li onclick="onAddSticker()" class="sticker-item"></li>
-                        <li onclick="onAddSticker()" class="sticker-item"></li>
-                        <li onclick="onAddSticker()" class="sticker-item"></li>
-                        <li onclick="onAddSticker()" class="sticker-item"></li>
+                    <ul class="sticker-list">
+                        <li onclick="onCreateSticker(this.innerText)"class="sticker-item">💘</li>
+                        <li onclick="onCreateSticker(this.innerText)" class="sticker-item">🤮</li>
+                        <li onclick="onCreateSticker(this.innerText)" class="sticker-item">👁️</li>
+                        <li onclick="onCreateSticker(this.innerText)" class="sticker-item">🍺</li>
+                        <li onclick="onCreateSticker(this.innerText)" class="sticker-item">👌</li>
                     </ul>
                 </div>
                 <div class="share-container">
-                    <img class ="btn" onclick="onShare()" src="img/buttons/share.png" alt="">
-                    <a href="#" class="btn" onclick="onDownload(this)" download="my-img.jpg"><img src="img/buttons/download.png" alt=""></a>
-                    <img class ="btn" onclick="onSave()" src="img/buttons/save.png" alt="">
+                    <img class="btn" onclick="onShare()" src="img/buttons/share.png" alt="">
+                    <a href="#" class="btn" onclick="onDownload(this)" download="my-img.jpg"><img
+                            src="img/buttons/download.png" alt=""></a>
+                    <img class="btn" onclick="onSave()" src="img/buttons/save.png" alt="">
                 </div>
 
             </section>
@@ -96,6 +98,7 @@
     <script src="js/services/storageService.js"></script>
     <script src="js/services/uploadService.js"></script>
     <script src="js/services/galleryService.js"></script>
+    <script src="js/services/selectService.js"></script>
     <script src="js/services/canvasService.js"></script>
     <script src="js/services/memeService.js"></script>
     <script src="js/galleryController.js"></script>

@@ -14,12 +14,13 @@ var gMeme = {
         {
             txt: '',
             size: 30,
+            width:0,
             align: 'center',
             strokeColor: 'white',
             fontColor: 'black',
             font: 'impact',
-            posX: 200,
-            posY: 200
+            pos: {x:225, y:50},
+            
 
         },
     ]
@@ -44,18 +45,44 @@ function createLine() {
     const line = {
         txt: '',
         size: 30,
+        width: 0,
         align: 'center',
         strokeColor: 'white',
         fontColor: 'black',
         font: 'impact',
-        posX: 200,
-        posY: 200
+        pos: {x:225, y:50},
+        
     }
+    if(gMeme.lines.length>0) line.pos.y=400
+    if(gMeme.lines.length>1) line.pos.y=225
     gMeme.lines.push(line)
     gMeme.selectedLineIdx = gMeme.lines.length - 1
 }
-function getNextLine() {
+function createSticker(emoji) {
 
+    const line = {
+        txt: `${emoji}`,
+        size: 50,
+        width: 0,
+        align: 'center',
+        strokeColor: 'white',
+        fontColor: 'black',
+        font: 'impact',
+        pos: {x:225, y:50},
+        
+    }
+    if(gMeme.lines.length>0) line.pos.y=400
+    if(gMeme.lines.length>1) line.pos.y=225
+    gMeme.lines.push(line)
+    gMeme.selectedLineIdx = gMeme.lines.length - 1
+}
+
+function setTextWidth(line,width){
+    line.width=width
+}
+
+function getNextLine() {
+    gMeme.lines[gMeme.selectedLineIdx].isSelected=false
     gMeme.selectedLineIdx++
     if (gMeme.selectedLineIdx >= gMeme.lines.length) gMeme.selectedLineIdx = 0
 }
@@ -78,15 +105,15 @@ function decreaseFont() {
 
 
 function alignLeft() {
-    gMeme.lines[gMeme.selectedLineIdx].posX = LEFT_ALIGN
+    gMeme.lines[gMeme.selectedLineIdx].pos.x = LEFT_ALIGN
     gMeme.lines[gMeme.selectedLineIdx].align = 'start'
 }
 function alignCenter() {
-    gMeme.lines[gMeme.selectedLineIdx].posX = gElCanvas.width / 2
+    gMeme.lines[gMeme.selectedLineIdx].pos.x = gElCanvas.width / 2
     gMeme.lines[gMeme.selectedLineIdx].align = 'center'
 }
 function alignRight() {
-    gMeme.lines[gMeme.selectedLineIdx].posX = gElCanvas.width - 10
+    gMeme.lines[gMeme.selectedLineIdx].pos.x = gElCanvas.width - 10
     gMeme.lines[gMeme.selectedLineIdx].align = 'end'
 }
 
@@ -113,3 +140,59 @@ function Save() {
 function memeSelect(idx) {
     gMeme = gMemesGallery[idx]
 }
+
+// scale and drag test
+
+function isDragable(pos){
+  const clickedLinePos= getClickedLinePos(pos)
+  if(clickedLinePos>=0){
+    gMeme.selectedLineIdx=clickedLinePos
+    return true
+  }
+}
+
+function getClickedLinePos(clickedPos)
+{
+    const idx = gMeme.lines.findIndex((line) => {
+        let offset = 0;
+        const { pos, align, width, size } = line;
+        if (align === 'start') offset = width / 2;
+        else if (align === 'end') offset = -width / 2;
+
+        return (
+            pos.x - width / 2 + offset -10 < clickedPos.x &&
+            pos.x + width / 2 + offset +10> clickedPos.x &&
+            pos.y - size - 5 < clickedPos.y &&
+            pos.y + 25 > clickedPos.y
+        );
+    });
+    return idx
+}
+
+function dragSelected(pos,gStartPos){
+    const dx=pos.x -gStartPos.x
+    const dy =pos.y - gStartPos.y
+    let idx =gMeme.selectedLineIdx
+    if (idx>=0){
+        gMeme.lines[idx].pos.x += dx
+        gMeme.lines[idx].pos.y +=dy
+
+        return
+    }
+}
+
+function getSelectPos(){
+    const idx=gMeme.selectedLineIdx
+    if (idx>=0){
+        const {size, width,pos,align}=gMeme.lines[idx]
+        let widthOffset=-width
+        if(align==='start') widthOffset=0;
+        if(align==='end') widthOffset= -width*2
+        const x =pos.x + (widthOffset/2) - 10
+        const y= pos.y - size + 10
+        const w=width+20
+        const h=size+15
+        return{x,y,w,h}
+    }
+}
+

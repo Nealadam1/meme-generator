@@ -1,6 +1,11 @@
 'use strict'
 
+var gSaveClean
+
 function onInitEditor() {
+    gElCanvas=document.getElementById('meme-canvas')
+    gCtx=gElCanvas.getContext('2d')
+    addListeners()
     renderMeme()
 }
 
@@ -8,20 +13,24 @@ function renderMeme() {
     const meme = getMeme()
     console.log(meme)
     renderCanvas(meme)
-
 }
 function onImgSelect(imgId){
+
+    addListeners();
     setImg(imgId)
     renderMeme()
-    
 }
 function onMemeSelect(idx){
-    memeSelect()
-    
+    addListeners();
+    memeSelect(idx)
+    onNextLine()
     renderMeme()
     
 }
-
+function updateTextInput(){
+    const textInput=document.querySelector('.control-box input')
+    textInput.value=getLineText()
+}
 function onSetLineText(text) {
     setLineText(text)
     renderMeme()
@@ -37,6 +46,13 @@ function onCreateLine(){
     createLine()
     const textInput=document.querySelector('.control-box input')
     textInput.value=''
+    renderMeme()
+}
+function onCreateSticker(emoji){
+    console.log (emoji)
+    createSticker(emoji)
+    const textInput=document.querySelector('.control-box input')
+    textInput.value=`${emoji}`
     renderMeme()
 }
 function onDeleteText(){
@@ -84,7 +100,10 @@ function onSetFontColor(color){
 }
 
 function onSave(){
-    Save()
+    gSaveClean=true
+    renderMeme()
+    setTimeout(Save, 10);
+    
     openMemeGallery()
 }
 
