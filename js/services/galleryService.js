@@ -1,10 +1,13 @@
 'use strict'
+const KEYWORD_STORAGE='KeywordDB'
+
+var gMemesGallery
 var gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
 var gFilterBy = { keyword: '' }
 var gImgs = [
-    { id: 1, url: 'img/1.jpg', keywords: ['funny', 'cat'] },
-    { id: 2, url: 'img/2.jpg', keywords: ['dog', 'cute'] },
-    { id: 3, url: 'img/3.jpg', keywords: ['dog', 'cute', 'baby'] }
+    { id: 1, url: 'img/gallery/1.jpg', keywords: ['funny', 'cat'] },
+    { id: 2, url: 'img/gallery/2.jpg', keywords: ['dog', 'cute'] },
+    { id: 3, url: 'img/gallery/3.jpg', keywords: ['dog', 'cute', 'baby'] }
 
 ]
 
@@ -19,5 +22,18 @@ function setImageFilter(filterBy = {}) {
 }
 
 function getKeyWords() {
+    var keywords=loadFromStorage(KEYWORD_STORAGE)
+    if(!keywords) return gKeywordSearchCountMap
+    gKeywordSearchCountMap=keywords
     return gKeywordSearchCountMap
+}
+
+function updateKeywordCount(keyword){
+    if(gKeywordSearchCountMap[keyword]<=10) gKeywordSearchCountMap[keyword]++
+    saveToStorage(KEYWORD_STORAGE,gKeywordSearchCountMap)
+}
+
+function getMemesGallery(){
+   var memeImgs=loadFromStorage(MEME_STORAGE)
+   return memeImgs
 }

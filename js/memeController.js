@@ -1,51 +1,97 @@
 'use strict'
 
-function onInitEditor(imageId) {
-    // TODO if meme doesnt exist create new meme 
-    // createMeme()
-    const memeId = 1
-
-    renderMeme(memeId)
+function onInitEditor() {
+    renderMeme()
 }
 
-function renderMeme(memeId) {
-    const meme = getMemebyId(memeId)
-    renderTextInput(meme.id)
-    renderCrudBtns(meme.id)
-    renderStyleEditor(meme.id)
-    renderStickerBox(meme.id)
-    renderShare(meme.id)
+function renderMeme() {
+    const meme = getMeme()
     console.log(meme)
     renderCanvas(meme)
 
 }
-function onSetImage(imgId){
+function onImgSelect(imgId){
     setImg(imgId)
-    renderMeme() // just found out you dont need meme id....
+    renderMeme()
+    
+}
+function onMemeSelect(idx){
+    memeSelect()
+    
+    renderMeme()
     
 }
 
-function onSetLineText(text,memeId) {
-    setLineText(text,memeId)
-    renderMeme(memeId)
+function onSetLineText(text) {
+    setLineText(text)
+    renderMeme()
 }
-function renderTextInput(memeId) {
-    const textInput = document.querySelector('.control-box input')
-  textInput.setAttribute('data-meme-id', `${memeId}`)
+function onNextLine(){
+    getNextLine()
+    const textInput=document.querySelector('.control-box input')
+    textInput.value=getLineText()
+    renderMeme()
+
 }
-function renderCrudBtns(memeId) {
-    const crudBtns = document.querySelectorAll('.crud-btns>*')
-    crudBtns.forEach(btn => btn.setAttribute('data-meme-id', `${memeId}`));
+function onCreateLine(){
+    createLine()
+    const textInput=document.querySelector('.control-box input')
+    textInput.value=''
+    renderMeme()
 }
-function renderStyleEditor(memeId) {
-    const styleBtns = document.querySelectorAll('.style-editor>*')
-    styleBtns.forEach(btn => btn.setAttribute('data-meme-id', `${memeId}`));
+function onDeleteText(){
+    deleteText()
+    const textInput=document.querySelector('.control-box input')
+    textInput.value=getLineText()
+    renderMeme()
 }
-function renderShare(memeId) {
-    const sharebtns = document.querySelectorAll('.share-container>*')
-    sharebtns.forEach(btn => btn.setAttribute('data-meme-id', `${memeId}`));
+function onIncreaseFont(){
+    increaseFont()
+    renderMeme()
+    
 }
-function renderStickerBox(memeId) {
-    const stickers = document.querySelectorAll('.sticker-box>*')
-    stickers.forEach(sticker => sticker.setAttribute('data-meme-id', `${memeId}`));
+function onDecreaseFont(){
+    decreaseFont()
+    renderMeme()
+}
+function onAlignLeft(){
+    alignLeft()
+    renderMeme()
+}
+function onAlignCenter(){
+    alignCenter()
+    renderMeme()
+}
+function onAlignRight(){
+    alignRight()
+    renderMeme()
+}
+function onSetFont(font){
+    setFont(font)
+    renderMeme()
+}
+function onSetStrokeColor(color){
+    const elimg=document.querySelector('.set-stroke-color img')
+    elimg.style.borderColor=color
+    setStrokeColor(color)
+    renderMeme()
+}
+function onSetFontColor(color){
+    const elimg=document.querySelector('.set-font-color img')
+    elimg.style.borderColor=color
+    setFontColor(color)
+    renderMeme()
+}
+
+function onSave(){
+    Save()
+    openMemeGallery()
+}
+
+function onDownload(elLink){
+    downloadCanvas(elLink)
+}
+
+function onShare(){
+    shareCanvas()
 }

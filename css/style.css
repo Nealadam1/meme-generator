@@ -1,3 +1,93 @@
+
+*{
+    box-sizing: border-box;
+}
+*:focus {
+    outline: none;
+}
+body{
+    text-align: center;
+}
 canvas{
     border: 1px solid black;
+}
+.btn{
+    cursor: pointer;
+}
+
+select 
+{
+    -webkit-appearance: none;
+}
+
+@font-face {
+    font-family: impact;
+    src: url(../font/impact.ttf);
+}
+
+.font-select{
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    
+}
+.font-select select{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.6rem;
+    border: none;
+    height: 45px;
+    width: 232px;
+    text-align: center;
+    background-color: transparent;
+    font-family: impact;
+}
+
+.set-stroke-color{
+    position: relative;
+    text-align: center;
+}
+.set-stroke-color img{
+    position: relative;
+    text-align: center;
+    pointer-events: none;
+    z-index: 2;
+    border: 3px solid black;
+    border-radius: 20px;
+    
+   
+}
+.set-stroke-color input{
+   position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height:48px;
+    width: 55px;
+    border: none;
+    z-index: 1;  
+}
+.set-font-color{
+    position: relative;
+    text-align: center;
+}
+.set-font-color img{
+    position: relative;
+    text-align: center;
+    pointer-events: none;
+    z-index: 2;
+    border: 3px solid white;
+    border-radius: 20px;
+}
+.set-font-color input{
+   position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height:48px;
+    width: 55px;
+    border: none;
+    z-index: 1;  
 }

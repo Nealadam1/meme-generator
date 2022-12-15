@@ -23,20 +23,38 @@ function resizeCanvas() {
 
 function drawImg(imgId,lines) {
     const elImg = new Image() // Create a new html img element
-    elImg.src = `img/${imgId}.jpg` // Send a network req to get that image, define the img src
+    elImg.src = `img/gallery/${imgId}.jpg` // Send a network req to get that image, define the img src
     elImg.onload = () => {
         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
-        lines.map(line=> drawText(line.txt,100,100))  
+        console.log(lines)
+        lines.map(line=> drawText(line,line.posX,100))  
     }
 }
-function drawText(text, x, y) {
+function drawText(line, x, y) {
     gCtx.lineWidth = 2
-    gCtx.strokeStyle = 'brown'
-    gCtx.fillStyle = 'black'
-    gCtx.font = "40px arial";
-    gCtx.textAlign = 'center'
+    gCtx.strokeStyle = `${line.strokeColor}`
+    gCtx.fillStyle = `${line.fontColor}`
+    gCtx.font = `${line.size}px ${line.font}`;
+    gCtx.textAlign = `${line.align}`
     gCtx.textBaseline = 'middle'
 
-    gCtx.fillText(text, x, y) // Draws (fills) a given text at the given (x, y) position.
-    gCtx.strokeText(text, x, y) // Draws (strokes) a given text at the given (x, y) position.
+    gCtx.fillText(line.txt, x, y) // Draws (fills) a given text at the given (x, y) position.
+    gCtx.strokeText(line.txt, x, y) // Draws (strokes) a given text at the given (x, y) position.
+}
+
+function downloadCanvas(elLink){
+    const imgContent = gElCanvas.toDataURL('image/jpeg') // image/jpeg the default format
+    console.log(imgContent)
+    elLink.href = imgContent
+}
+function shareCanvas(){
+    const imgDataUrl = gElCanvas.toDataURL('image/jpeg')
+    function onSuccess(uploadedImgUrl) {
+        // Encode the instance of certain characters in the url
+        const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl)
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}`)
+    }
+    // Send the image to the server
+    doUploadImg(imgDataUrl, onSuccess)
+
 }
