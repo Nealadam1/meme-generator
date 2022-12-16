@@ -126,11 +126,11 @@ function setStrokeColor(color) {
 function setFontColor(color) {
     gMeme.lines[gMeme.selectedLineIdx].fontColor = color
 }
-function Save() {
+function save() {
     gMeme['memeUrl'] = gElCanvas.toDataURL('image/jpeg')
     const isEmpty = loadFromStorage(MEME_STORAGE)
     if (!isEmpty) {
-        saveToStorage(MEME_STORAGE, gMeme)
+        saveMemetoStorage(MEME_STORAGE, gMeme)
     } else {
         pushToStorage(MEME_STORAGE, gMeme)
     }
@@ -182,7 +182,9 @@ function dragSelected(pos,gStartPos){
 }
 
 function getSelectPos(){
+    
     const idx=gMeme.selectedLineIdx
+    if(!gMeme.lines[idx]) return
     if (idx>=0){
         const {size, width,pos,align}=gMeme.lines[idx]
         let widthOffset=-width

@@ -1,7 +1,11 @@
 'use strict'
 
-function saveToStorage(key, val) {
+function saveMemetoStorage(key, val) {
     val=[val]
+    localStorage.setItem(key, JSON.stringify(val))
+}
+
+function saveKeywordtoStorage(key, val) {
     localStorage.setItem(key, JSON.stringify(val))
 }
 

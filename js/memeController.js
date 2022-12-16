@@ -19,12 +19,14 @@ function onImgSelect(imgId){
     addListeners();
     setImg(imgId)
     renderMeme()
+    toggleEditor()
 }
 function onMemeSelect(idx){
     addListeners();
     memeSelect(idx)
     onNextLine()
     renderMeme()
+    toggleEditor()
     
 }
 function updateTextInput(){
@@ -102,10 +104,14 @@ function onSetFontColor(color){
 function onSave(){
     gSaveClean=true
     renderMeme()
-    setTimeout(Save, 10);
-    
-    openMemeGallery()
+    const saveTimeout=setTimeout(() => {
+       save()
+       openMemeGallery() 
+       clearTimeout(saveTimeout)
+    }, 10);
+    // setTimeout(Save, 10);
 }
+    
 
 function onDownload(elLink){
     downloadCanvas(elLink)
@@ -113,4 +119,16 @@ function onDownload(elLink){
 
 function onShare(){
     shareCanvas()
+}
+
+
+// design handlers
+
+function toggleMenu() {
+    document.body.classList.toggle('menu-open')
+}
+
+function toggleEditor() {
+    document.body.classList.toggle('editor-open')
+    document.querySelector('.gallery-container').classList.add('hidden')
 }

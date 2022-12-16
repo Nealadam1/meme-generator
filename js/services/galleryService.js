@@ -2,7 +2,7 @@
 const KEYWORD_STORAGE='KeywordDB'
 
 var gMemesGallery
-var gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
+var gKeywordSearchCountMap = { 'funny': 1, 'cat': 1, 'baby':1,'test':1 }
 var gFilterBy = { keyword: '' }
 var gImgs = [
     { id: 1, url: 'img/gallery/1.jpg', keywords: ['funny', 'cat'] },
@@ -30,11 +30,11 @@ function getKeyWords() {
 
 function updateKeywordCount(keyword){
     if(gKeywordSearchCountMap[keyword]<=10) gKeywordSearchCountMap[keyword]++
-    saveToStorage(KEYWORD_STORAGE,gKeywordSearchCountMap)
+    saveKeywordtoStorage(KEYWORD_STORAGE,gKeywordSearchCountMap)
 }
 
 function getMemesGallery(){
-   var memes=loadFromStorage(MEME_STORAGE)
+   const memes=loadFromStorage(MEME_STORAGE)
    gMemesGallery=memes
    return memes
 }
