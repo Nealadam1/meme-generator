@@ -573,8 +573,8 @@ body.editor-open .editor-container{
         border-radius: 20px;
         width: 50vw;
         height: 50vw;
-        max-width: 450px;
-        max-height: 450px;
+        max-width: 1000px;
+        max-height: 1000px;
         margin-left: 1vw;
     }
     .editor-container .control-box {

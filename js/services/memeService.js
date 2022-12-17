@@ -143,8 +143,6 @@ function memeSelect(idx) {
     gMeme = gMemesGallery[idx]
 }
 
-// scale and drag test
-
 function isDragable(pos){
   const clickedLinePos= getClickedLinePos(pos)
   if(clickedLinePos>=0){
@@ -157,17 +155,17 @@ function getClickedLinePos(clickedPos)
 {
     const idx = gMeme.lines.findIndex((line) => {
         let offset = 0;
-        const { pos, align, width, size } = line;
-        if (align === 'start') offset = width / 2;
-        else if (align === 'end') offset = -width / 2;
+        const { pos, align, width, size } = line
+        if (align === 'start') offset = width / 2
+        else if (align === 'end') offset = -width / 2
 
         return (
             pos.x - width / 2 + offset -10 < clickedPos.x &&
             pos.x + width / 2 + offset +10> clickedPos.x &&
             pos.y - size - 5 < clickedPos.y &&
             pos.y + 25 > clickedPos.y
-        );
-    });
+        )
+    })
     return idx
 }
 

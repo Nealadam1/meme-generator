@@ -11,9 +11,9 @@ function onInitEditor() {
 
 function renderMeme() {
     const meme = getMeme()
-    console.log(meme)
     renderCanvas(meme)
 }
+
 function onImgSelect(imgId){
 
     addListeners()
@@ -23,37 +23,40 @@ function onImgSelect(imgId){
     resizeCanvas()
     centerInitalText()
 }
+
 function onMemeSelect(idx){
     addListeners()
     memeSelect(idx)
     onNextLine()
     renderMeme()
     toggleEditor()
-    resizeCanvas()
-    
-    
+    resizeCanvas()  
 }
+
 function updateTextInput(){
     const textInput=document.querySelector('.control-box input')
     textInput.value=getLineText()
 }
+
 function onSetLineText(text) {
     setLineText(text)
     renderMeme()
 }
+
 function onNextLine(){
     getNextLine()
     const textInput=document.querySelector('.control-box input')
     textInput.value=getLineText()
     renderMeme()
-
 }
+
 function onCreateLine(){
     createLine()
     const textInput=document.querySelector('.control-box input')
     textInput.value=''
     renderMeme()
 }
+
 function onCreateSticker(emoji){
   
     createSticker(emoji)
@@ -61,43 +64,52 @@ function onCreateSticker(emoji){
     textInput.value=`${emoji}`
     renderMeme()
 }
+
 function onDeleteText(){
     deleteText()
     const textInput=document.querySelector('.control-box input')
     textInput.value=getLineText()
     renderMeme()
 }
+
 function onIncreaseFont(){
     increaseFont()
     renderMeme()
     
 }
+
 function onDecreaseFont(){
     decreaseFont()
     renderMeme()
 }
+
 function onAlignLeft(){
     alignLeft()
     renderMeme()
 }
+
 function onAlignCenter(){
     alignCenter()
     renderMeme()
 }
+
 function onAlignRight(){
     alignRight()
     renderMeme()
 }
+
 function onSetFont(font){
     setFont(font)
     renderMeme()
 }
+
 function onSetStrokeColor(color){
     const elimg=document.querySelector('.set-stroke-color img')
     elimg.style.borderColor=color
     setStrokeColor(color)
     renderMeme()
 }
+
 function onSetFontColor(color){
     const elimg=document.querySelector('.set-font-color img')
     elimg.style.borderColor=color
@@ -112,11 +124,9 @@ function onSave(){
        save()
        openMemeGallery() 
        clearTimeout(saveTimeout)
-    }, 10);
-    // setTimeout(Save, 10);
+    }, 10)  
 }
     
-
 function onDownload(elLink){
     downloadCanvas(elLink)
 }
@@ -125,9 +135,7 @@ function onShare(){
     shareCanvas()
 }
 
-
 // design handlers
-
 function toggleMenu() {
     document.body.classList.toggle('menu-open')
 }

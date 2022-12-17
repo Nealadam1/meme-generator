@@ -3,7 +3,7 @@ var gElCanvas
 var gCtx
 var gIsDrag = false
 var gStartPos
-const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend'];
+const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 
 function renderCanvas() {
     
@@ -23,11 +23,10 @@ function resizeCanvas() {
 
 
 function drawImg(imgId, lines) {
-    const elImg = new Image() // Create a new html img element
-    elImg.src = `img/gallery/${imgId}.jpg` // Send a network req to get that image, define the img src
+    const elImg = new Image() 
+    elImg.src = `img/gallery/${imgId}.jpg`
     elImg.onload = () => {
         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
-        console.log(lines)
         lines.forEach(line => drawText(line, line.pos.x, line.pos.y))
          if(gSaveClean) return gSaveClean=false
          renderSelect()
@@ -54,24 +53,22 @@ function drawText(line, x, y) {
     gCtx.textAlign = `${line.align}`
     gCtx.textBaseline = 'middle'
 
-    gCtx.fillText(line.txt, x, y) // Draws (fills) a given text at the given (x, y) position.
-    gCtx.strokeText(line.txt, x, y) // Draws (strokes) a given text at the given (x, y) position.
+    gCtx.fillText(line.txt, x, y) 
+    gCtx.strokeText(line.txt, x, y) 
     setTextWidth(line, gCtx.measureText(line.txt).width)
 }
 
 function downloadCanvas(elLink) {
-    const imgContent = gElCanvas.toDataURL('image/jpeg') // image/jpeg the default format
+    const imgContent = gElCanvas.toDataURL('image/jpeg') 
     console.log(imgContent)
     elLink.href = imgContent
 }
 function shareCanvas() {
     const imgDataUrl = gElCanvas.toDataURL('image/jpeg')
     function onSuccess(uploadedImgUrl) {
-        // Encode the instance of certain characters in the url
         const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl)
         window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}`)
     }
-    // Send the image to the server
     doUploadImg(imgDataUrl, onSuccess)
 
 }
@@ -148,7 +145,7 @@ function onLeaveCanvas(){
     setTimeout(() => {
         gSaveClean=true
        renderMeme() 
-    }, 2000);
+    }, 2000)
 
 }
 
@@ -157,6 +154,6 @@ function onUpTouch(){
     setTimeout(() => {
         gSaveClean=true
        renderMeme() 
-    }, 2000);
+    }, 2000)
     
 }
