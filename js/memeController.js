@@ -123,7 +123,7 @@ function onSave(){
     const saveTimeout=setTimeout(() => {
        save()
        openMemeGallery() 
-       clearTimeout(saveTimeout)
+       clearTimeout(saveTimeout);
     }, 10)  
 }
     

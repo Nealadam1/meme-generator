@@ -145,8 +145,7 @@ function onLeaveCanvas(){
     setTimeout(() => {
         gSaveClean=true
        renderMeme() 
-    }, 2000)
-
+    }, 2000);
 }
 
 function onUpTouch(){
@@ -154,6 +153,6 @@ function onUpTouch(){
     setTimeout(() => {
         gSaveClean=true
        renderMeme() 
-    }, 2000)
+    }, 2000);
     
 }
