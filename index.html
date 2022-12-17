@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1">
     <title>Meme Generator</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -12,7 +12,7 @@
 <body class="main-layout" onload="onInit()">
     <div class="main-screen full" onclick="toggleMenu()"></div>
     <header class="main-header full">
-        <nav class="nav-bar">
+        <nav class="nav-bar full">
             <a class="logo" href="#"><img src="img/LOGO.png" alt=""></a>
             <ul class="nav-items clean-list">
                 <li class=><a id="gallery" onclick="openGallery()" href="#">Gallery</a></li>
@@ -28,12 +28,19 @@
         <section class="gallery-container">
             <div class="search-bar">
                 <img src="img/buttons/searchicon.png" alt="">
-                <input onkeyup="onSetFilterBy({keyword: this.value})" type="text" placeholder="Search">
+                <input list="keywords" onkeyup="onSetFilterBy({keyword: this.value})" type="text" placeholder="Search">
+                <datalist id="keywords">
+                    <option value="Chocolate">
+                    <option value="Coconut">
+                    <option value="Mint">
+                    <option value="Strawberry">
+                    <option value="Vanilla">
+                </datalist>
                 <div class="keyword-bar">
                     <ul class="keyword-search clean-list">
 
                     </ul>
-                    <button class="more-btn">More</button>
+                    <button onclick="toggleWordMenu()" class="more-btn">More</button>
                 </div>
             </div>
             <section class="image-container">
@@ -43,7 +50,7 @@
         </section>
         <section class="editor-container">
             <div class="canvas-container">
-                <canvas id="meme-canvas" height="450" width="450">
+                <canvas id="meme-canvas" height="500" width="500">
 
                 </canvas>
             </div>

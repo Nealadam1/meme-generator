@@ -16,17 +16,21 @@ function renderMeme() {
 }
 function onImgSelect(imgId){
 
-    addListeners();
+    addListeners()
     setImg(imgId)
     renderMeme()
     toggleEditor()
+    resizeCanvas()
+    centerInitalText()
 }
 function onMemeSelect(idx){
-    addListeners();
+    addListeners()
     memeSelect(idx)
     onNextLine()
     renderMeme()
     toggleEditor()
+    resizeCanvas()
+    
     
 }
 function updateTextInput(){
@@ -51,7 +55,7 @@ function onCreateLine(){
     renderMeme()
 }
 function onCreateSticker(emoji){
-    console.log (emoji)
+  
     createSticker(emoji)
     const textInput=document.querySelector('.control-box input')
     textInput.value=`${emoji}`
@@ -131,4 +135,8 @@ function toggleMenu() {
 function toggleEditor() {
     document.body.classList.toggle('editor-open')
     document.querySelector('.gallery-container').classList.add('hidden')
+}
+
+function toggleWordMenu(){
+    document.body.classList.toggle('keyword-open')
 }

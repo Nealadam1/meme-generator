@@ -10,13 +10,15 @@ function renderCanvas() {
     
     const { selectedImgId, lines } = getMeme()
     drawImg(selectedImgId, lines)
+    
 
 
 }
 function resizeCanvas() {
-    const elContainer = document.querySelector('.canvas-container')
+    const elContainer = document.querySelector('.canvas-container canvas')
     gElCanvas.width = elContainer.offsetWidth
     gElCanvas.height = elContainer.offsetHeight
+    
 }
 
 
@@ -30,6 +32,7 @@ function drawImg(imgId, lines) {
          if(gSaveClean) return gSaveClean=false
          renderSelect()
     }
+    
 }
 
 function renderSelect() {
@@ -76,6 +79,7 @@ function shareCanvas() {
 function addListeners() {
     addMouseListeners()
     addTouchListeners()
+    resizeCanvas()
 }
 
 function addMouseListeners() {

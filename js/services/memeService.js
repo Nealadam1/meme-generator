@@ -5,7 +5,6 @@ const LEFT_ALIGN = 10
 const MEME_STORAGE = 'MemesDB'
 
 
-
 var gMeme = {
 
     selectedImgId: 1,
@@ -19,7 +18,7 @@ var gMeme = {
             strokeColor: 'white',
             fontColor: 'black',
             font: 'impact',
-            pos: {x:225, y:50},
+            pos: {x:50, y:50},
             
 
         },
@@ -29,6 +28,7 @@ var gMeme = {
 
 function getMeme() {
     return gMeme
+    
 
 }
 
@@ -39,6 +39,8 @@ function setLineText(text) {
 
 function setImg(imgId) {
     gMeme.selectedImgId = imgId
+    
+   
 }
 function createLine() {
 
@@ -50,11 +52,11 @@ function createLine() {
         strokeColor: 'white',
         fontColor: 'black',
         font: 'impact',
-        pos: {x:225, y:50},
+        pos: {x:gElCanvas.width*0.5, y:gElCanvas.height*0.5},
         
     }
-    if(gMeme.lines.length>0) line.pos.y=400
-    if(gMeme.lines.length>1) line.pos.y=225
+    if(gMeme.lines.length>0) line.pos.y=gElCanvas.height*0.8
+    if(gMeme.lines.length>1) line.pos.y=gElCanvas.height*0.5
     gMeme.lines.push(line)
     gMeme.selectedLineIdx = gMeme.lines.length - 1
 }
@@ -68,11 +70,11 @@ function createSticker(emoji) {
         strokeColor: 'white',
         fontColor: 'black',
         font: 'impact',
-        pos: {x:225, y:50},
+        pos: {x:gElCanvas.width*0.5, y:gElCanvas.height*0.5},
         
     }
-    if(gMeme.lines.length>0) line.pos.y=400
-    if(gMeme.lines.length>1) line.pos.y=225
+    if(gMeme.lines.length>0)  line.pos.y=gElCanvas.height*0.8
+    if(gMeme.lines.length>1) line.pos.y=gElCanvas.height*0.5
     gMeme.lines.push(line)
     gMeme.selectedLineIdx = gMeme.lines.length - 1
 }
@@ -196,5 +198,9 @@ function getSelectPos(){
         const h=size+15
         return{x,y,w,h}
     }
+}
+
+function centerInitalText(){
+    if(gMeme.lines[0].pos.x) gMeme.lines[0].pos.x=gElCanvas.width/2
 }
 

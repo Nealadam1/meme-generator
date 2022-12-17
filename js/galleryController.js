@@ -41,6 +41,13 @@ function renderKeyWords() {
         strHTML.push(`<li onclick="onSelectKeyword(this.id)" id=${key} style=font-size:${value * 5}px>${key}</li>`)
     }
     document.querySelector('.keyword-search').innerHTML = strHTML.join('')
+    renderDataList(keywords)
+}
+function renderDataList(keywords){
+    keywords=Object.keys(keywords)
+    const strHTML=keywords.map(key=> `<option value="${key}">` )
+    document.querySelector('.search-bar datalist').innerHTML=strHTML.join('')
+
 }
 
 function renderFilterByQueryStringParams() {
