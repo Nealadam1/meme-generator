@@ -39,8 +39,22 @@ function setLineText(text) {
 
 function setImg(imgId) {
     gMeme.selectedImgId = imgId
-    
-   
+    gMeme.selectedLineIdx=0
+    gMeme.lines= [
+        {
+            txt: '',
+            size: 30,
+            width:0,
+            align: 'center',
+            strokeColor: 'white',
+            fontColor: 'black',
+            font: 'impact',
+            pos: {x:50, y:50},
+            
+
+        },
+    ]
+
 }
 function createLine() {
 

@@ -19,6 +19,7 @@ function onImgSelect(imgId){
     addListeners()
     setImg(imgId)
     renderMeme()
+    onNextLine()
     toggleEditor()
     resizeCanvas()
     centerInitalText()
